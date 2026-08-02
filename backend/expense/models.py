@@ -17,6 +17,7 @@ class Expense(models.Model):
   ExpenseItem = models.CharField(max_length=100)
   ExpenseCost = models.CharField(max_length=100)
   NoteDate = models.DateTimeField(auto_now_add=True) 
+  
 
   def __str__(self):
     return f"{self.ExpenseItem} - {self.ExpenseCost}"

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast, Toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ const Signup = () => {
         header: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData)
       });
-      console.log(response);
+      // console.log(response);
 
       if (response.status === 201) {
         toast.success('Signup successfully! Please Login.')

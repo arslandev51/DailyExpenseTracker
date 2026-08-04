@@ -23,7 +23,7 @@ def signup(request):
 @csrf_exempt
 def login(request):
   if request.method == 'POST':
-    data = json.load(request.body)
+    data = json.loads(request.body)
     email = data.get('Email')
     password = data.get('Password')
 

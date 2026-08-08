@@ -1,39 +1,68 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  return(
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  const userId = localStorage.getItem('userId');
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('userId');
+    navigate('/login')
+  }
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        <Link className="navbar-brand" to="#"><i className='fas fa-wallet me-2'></i>Expense Tracker</Link>
+        <button className="navbar-toggler" type="button" data-bs- toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item active">
+              <Link className="nav-link" to="/"><i className='fas fa-home me-1'></i>Home</Link>
+            </li>
+
+            {userId ? (
+
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard"><i className='fas fa-tachometer-alt me-1'></i>Dashboard</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/add-expense"><i className='fas fa-plus me-1'></i>Add Expense</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/manage-expense"><i className='fas fa-tasks me-1'></i>Manage Expense</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/expense-report"><i className='fas fa-file-alt me-1'></i>Expense Report</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/change-password"><i className='fas fa-key me-1'></i>Change Password</Link>
+              </li>
+              <button className="btn btn-danger btn-sm ms-2" onClick={handleLogout}>
+                <i className='fas fa-sign-out me-1'></i>Logout
+              </button>
+            </>
+
+            ) : (
+
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/signup"><i className='fas fa-user-plus me-1'></i>Signup</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login"><i className='fas fa-sign-in-alt me-1'></i>Login</Link>
+                </li>
+              </>
+
+            ) }
+
+          </ul>
         </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+      </div>
+    </nav>
   )
 };
 

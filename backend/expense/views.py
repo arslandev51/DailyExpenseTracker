@@ -32,3 +32,21 @@ def login(request):
       return JsonResponse({'message':'Login Successfully','userId':user.id,'userName':user.FullName},status=200)
     except:
       return JsonResponse({'message':'Invalid credentials'},status=400)
+
+
+@csrf_exempt
+def add_expense(request):
+  if request.method == 'POST':
+    data = json.loads(request.body)      #add to python dictionary conversions
+    user_id = data.get('UserId')
+    expense_date = data.get('ExpenseDate')
+    expense_item = data.get('ExpenseItem')
+    expense_cost = data.get('ExpenseCost')
+
+    user = UserDetail.objects.get(id = user_id)
+    try:
+      Expense.objects.create(UserId=user,ExpenseDate=expense_date,ExpenseItem=expense_item,ExpenseCost=expense_cost)
+      return JsonResponse({'message':'Login Successful'},status=201)
+    except Exception as e:
+      return JsonResponse({'message':'Something went wrong','error':str(e)},status=400)
+

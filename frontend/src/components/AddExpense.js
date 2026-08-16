@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {toast,ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -54,7 +55,7 @@ const AddExpense = () => {
   return(
     <div className='container mt-5'>
       <div className='text-center mb-4'>
-        <h2><i className='fas fa-circle-plus me-2'></i>Signup</h2>
+        <h2><i className='fas fa-circle-plus me-2'></i>Add Expense</h2>
         <p className='text-muted'>Track your new spending here</p>
       </div>
       <form className='p-4 rounded shadow mx-auto' style={{maxWidth:'400px'}} onSubmit={handleSubmit}>

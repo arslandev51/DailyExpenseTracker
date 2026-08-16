@@ -50,3 +50,26 @@ def add_expense(request):
     except Exception as e:
       return JsonResponse({'message':'Something went wrong','error':str(e)},status=400)
 
+@csrf_exempt
+def manage_expense(request,user_id):
+  if request.method == 'GET':
+
+    expenses = Expense.objects.filter(UserId=user_id)
+    expense_list = list(expenses.values())
+    return JsonResponse(expense_list,safe=False)
+
+@csrf_exempt
+def update_expense(request,expense_id):
+  if request.method == 'PUT':
+    data = json.loads(request.body)
+    try:
+      expense = Expense.objects.get(id=expense_id)
+      expense.ExpenseDate = data.get('ExpenseDate',expense.ExpenseDate)
+      expense.ExpenseItem = data.get('ExpenseItem',expense.ExpenseItem)
+      expense.ExpenseCost = data.get('ExpenseCost',expense.ExpenseCost)
+      expense.save()
+      return JsonResponse({'message':'Expense Updated Successfully'})
+    except:
+      return JsonResponse({'message':'Expense not found'},status=404)
+
+

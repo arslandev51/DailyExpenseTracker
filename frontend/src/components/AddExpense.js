@@ -50,7 +50,7 @@ const AddExpense = () => {
       console.error('Error:',error)
       toast.error('Something went wrong. Try again.');
     }
-  }
+  };
 
   return(
     <div className='container mt-5'>

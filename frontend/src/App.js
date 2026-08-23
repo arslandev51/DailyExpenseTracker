@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import AddExpense from './components/AddExpense';
 import ManageExpense from './components/ManageExpense';
+import ExpenseReport from './components/ExpenseReport';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path='/add-expense' element={<AddExpense/>}></Route>
           <Route path='/manage-expense' element={<ManageExpense/>}></Route>
+          <Route path='/expense-report' element={<ExpenseReport/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>
